@@ -59,7 +59,10 @@ module.exports = function(grunt){
         },
         concat: {
             options: {
-                stripBanners: true
+                stripBanners: true,
+                process: function(src) {
+                    return src.replace('// require.front.js', require('fs').readFileSync('js/front.js', "utf8"));
+                }
             },
             main: {
                 src: 'js/bootstrap-datepicker.js',

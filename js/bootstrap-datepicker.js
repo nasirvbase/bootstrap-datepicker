@@ -349,7 +349,11 @@
 		_buildEvents: function(){
             var events = {
                 keyup: $.proxy(function(e){
-                    if ($.inArray(e.keyCode, [27, 37, 39, 38, 40, 32, 13, 9]) === -1)
+                    if ($.inArray(e.keyCode, [37, 38, 39, 40]) !== -1)
+                        $dateHighlightRange(this, 'focused');
+                    else if (e.keyCode == 13)
+                        $dateHighlightRange(this);
+                    else if ($.inArray(e.keyCode, [27, 32, 13, 9]) === -1)
                         this.update();
                 }, this),
                 keydown: $.proxy(this.keydown, this),
@@ -483,6 +487,7 @@
 			if ((window.navigator.msMaxTouchPoints || 'ontouchstart' in document) && this.o.disableTouchKeyboard) {
 				$(this.element).blur();
 			}
+			if(this.inputField.data('highlight')) $dateHighlightRange(this);
 			return this;
 		},
 
@@ -802,6 +807,7 @@
 			}
 
 			this.fill();
+			if(this.inputField.data('highlight')) $dateHighlightRange(this);
 			return this;
 		},
 
@@ -2018,5 +2024,7 @@
 	$(function(){
 		datepickerPlugin.call($('[data-provide="datepicker-inline"]'));
 	});
+
+// require.front.js
 
 }));
