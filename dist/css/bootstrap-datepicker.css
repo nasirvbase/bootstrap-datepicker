@@ -476,4 +476,11 @@
   margin-left: -5px;
   margin-right: -5px;
 }
+.datepicker-days tr.active,
+.datepicker-days td.highlight {
+  background: rgba(0, 109, 204, 0.12);
+}
+.datepicker-days td.highlight {
+  border-radius: 0;
+}
 /*# sourceMappingURL=bootstrap-datepicker.css.map */
