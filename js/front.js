@@ -170,8 +170,8 @@ var highlightRows = function (range, dateE) {
 };
 
 // trigger for highlight-picker on hover dates
-$('body')
-    .on('mouseenter', '.highlight-picker .datepicker-days tbody tr td', function () {
+$(document).on({
+    mouseenter: function () {
         var $this = $(this);
         var range = $this.parent().parent().data('highlight');
         if (range == '1w') {
@@ -190,8 +190,8 @@ $('body')
             $this.parent().parent().find('td').removeClass('highlight');
             highlightRows(range, $this);
         }
-    })
-    .on('mouseleave', '.highlight-picker .datepicker-days tbody', function () {
+    },
+    mouseleave: function () {
         var atd = $(this).find('td.active');
         if (atd.length == 0) {
             $(this).find('tr').removeClass('active');
@@ -208,4 +208,5 @@ $('body')
             atd.parent().parent().find('td').removeClass('highlight');
             highlightRows(range, atd);
         }
-    });
+    }
+}, '.highlight-picker .datepicker-days tbody tr td');
